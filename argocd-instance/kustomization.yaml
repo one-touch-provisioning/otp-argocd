@@ -17,4 +17,5 @@ patchesStrategicMerge:
   - resource-customizations/rhacm.yaml
   - resource-customizations/rhacs.yaml
   - resource-customizations/cp4i.yaml
+  - resource-customizations/cpd.yaml
   
