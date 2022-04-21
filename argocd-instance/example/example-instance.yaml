@@ -1,0 +1,194 @@
+apiVersion: v1
+data:
+  resource.customizations.health.hive.openshift.io_ClusterDeployment: |
+    hs = {}
+    generation = obj.metadata.generation
+    if obj.status ~= nil then
+      if obj.status.conditions ~= nil then
+        for i, condition in ipairs(obj.status.conditions) do
+          if condition.type == "Hibernating" and condition.status == "False" then
+            hs.status = "Healthy"
+            hs.message = condition.message
+            return hs
+          end
+        end
+      end
+    end
+    hs.status = "Progressing"
+    return hs
+  resource.customizations.health.internal.observability.open-cluster-management.io_MultiClusterObservabilit: "hs
+    = {}\nif obj.status ~= nil and obj.status.conditions ~= nil then\n  for i, condition
+    in ipairs(obj.status.conditions) do  \n    if condition.status == \"True\" and
+    condition.reason == \"Ready\" then\n      hs.status = \"Healthy\"\n      hs.message
+    = \"MultiClusterObservability is Ready\"\n      return hs\n    end\n  end\nend\nhs.status
+    = \"Progressing\"\nhs.message = \"Waiting for MultiClusterObservability to deploy.\"\nreturn
+    hs "
+  resource.customizations.health.internal.open-cluster-management.io_ManagedClusterInfo: "hs
+    = {}\nif obj.status ~= nil and obj.status.conditions ~= nil then\n  for i, condition
+    in ipairs(obj.status.conditions) do  \n    if condition.status == \"True\" and
+    condition.reason == \"ManagedClusterInfoSynced\" then\n      hs.status = \"Healthy\"\n
+    \     hs.message = \"Managed cluster is added to hub cluster\"\n      return hs\n
+    \   end\n    if condition.reason == \"ManagedClusterLeaseUpdateStopped\" and condition.status
+    == \"Unknown\" and condition.type == \"ManagedClusterConditionAvailable\" then\n
+    \     hs.status = \"Degraded\"\n      hs.message = \"Managed cluster failed to
+    deploy\"\n      return hs\n    end\n  end\nend\nhs.status = \"Progressing\"\nhs.message
+    = \"Waiting for managed cluster to be deploy.\"\nreturn hs\n"
+  resource.customizations.health.ocs.openshift.io_StorageCluster: |
+    hs = {}
+    if obj.status ~= nil then
+      if obj.status.phase ~= nil then
+        hs.message = obj.status.phase
+        if obj.status.phase == "Running" then
+          hs.status = "Healthy"
+        else
+          hs.status = "Progressing"
+        end
+        return hs
+      end
+    end
+    hs.status = "Progressing"
+    hs.message = "Unknown"
+    return hs
+  resource.customizations.health.operator.open-cluster-management.io_MultiClusterHub: |
+    hs = {}
+    if obj.status ~= nil then
+      if obj.status.phase ~= nil then
+        hs.message = obj.status.phase
+        if obj.status.phase == "Running" then
+          hs.status = "Healthy"
+        else
+          hs.status = "Progressing"
+        end
+        return hs
+      end
+    end
+    hs.status = "Progressing"
+    hs.message = "Unknown"
+    return hs
+  resource.exclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun
+  statusbadge.enabled: "true"
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cm
+  namespace: openshift-gitops
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ArgoCD
+metadata:
+  name: otp-gitops
+  namespace: openshift-gitops
+spec:
+  applicationSet:
+    resources:
+      limits:
+        cpu: "2"
+        memory: 1Gi
+      requests:
+        cpu: 250m
+        memory: 512Mi
+  controller:
+    processors: {}
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+      requests:
+        cpu: 250m
+        memory: 1Gi
+  dex:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  grafana:
+    enabled: false
+    ingress:
+      enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+    route:
+      enabled: false
+  ha:
+    enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  initialSSHKnownHosts: {}
+  kustomizeBuildOptions: --enable-alpha-plugins
+  prometheus:
+    enabled: false
+    ingress:
+      enabled: false
+    route:
+      enabled: false
+  rbac: {}
+  redis:
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 250m
+        memory: 128Mi
+  repo:
+    image: quay.io/benswinneyau/openshift-gitops-repo-server
+    resources:
+      limits:
+        cpu: "1"
+        memory: 512Mi
+      requests:
+        cpu: 250m
+        memory: 256Mi
+    version: v1.4.5
+  resourceCustomizations: ""
+  resourceExclusions: |
+    - apiGroups:
+      - tekton.dev
+      clusters:
+      - '*'
+      kinds:
+      - TaskRun
+      - PipelineRun
+  server:
+    autoscale:
+      enabled: false
+    grpc:
+      ingress:
+        enabled: false
+    ingress:
+      enabled: false
+    resources:
+      limits:
+        cpu: 500m
+        memory: 256Mi
+      requests:
+        cpu: 125m
+        memory: 128Mi
+    route:
+      enabled: true
+    service:
+      type: ""
+  tls:
+    ca: {}
