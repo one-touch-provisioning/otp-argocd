@@ -1,6 +1,6 @@
 # Overview
 
-Each file in the health-checks folder represents a set of health checks grouped by products.
+Each file in the `resource-customizations` folder represents a set of resource customizations (health checks and diffings) grouped by products.
 
 Example file in `example/example-instance.yaml` is created with:
 
