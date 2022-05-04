@@ -62,3 +62,4 @@ These health checks/diffing are [maintained by ArgoCD](https://github.com/argopr
 - `kubevirt.io/VirtualMachine`
 - `kubevirt.io/VirtualMachineInstance`
 - `cdi.kubevirt.io/DataVolume`
+- `operators.coreos.com/Subscription`
