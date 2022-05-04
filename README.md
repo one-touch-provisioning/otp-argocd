@@ -1,13 +1,11 @@
 # Install and configure OpenShift GitOps
 
-fila
-
 - [Red Hat OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html) uses [Argo CD](https://argoproj.github.io/argo-cd/), an open-source declarative tool, to maintain and reconcile cluster resources.
 
 1. Install the OpenShift GitOps Operator and create a `ClusterRole` and `ClusterRoleBinding`.
 
    ```bash
-   oc apply -f .
+   oc apply -f setup/
    while ! oc wait crd applications.argoproj.io --timeout=-1s --for=condition=Established  2>/dev/null; do sleep 30; done
    while ! oc wait pod --timeout=-1s --for=condition=Ready -l '!job-name' -n openshift-gitops > /dev/null; do sleep 30; done
    ```
