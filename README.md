@@ -30,7 +30,7 @@
    export ROUTE_NAME=otp-gitops-server
    export ROUTE_NAMESPACE=openshift-gitops
    export CONSOLE_LINK_URL="https://$(oc get route $ROUTE_NAME -o=jsonpath='{.spec.host}' -n $ROUTE_NAMESPACE)"
-   envsubst < <(cat 4_consolelink.yaml.envsubst) | kubectl apply -f -
+   envsubst < <(cat setup/4_consolelink.yaml.envsubst) | kubectl apply -f -
    ```
 
 5. Retrieve admin login details
