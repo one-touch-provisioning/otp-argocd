@@ -22,7 +22,7 @@ spec:
     route:
       enabled: true
     service:
-      type: ''
+      type: ""
   grafana:
     enabled: false
     ingress:
@@ -42,28 +42,27 @@ spec:
       enabled: false
     route:
       enabled: false
-  initialSSHKnownHosts: {}   
+  initialSSHKnownHosts: {}
   resourceCustomizations: ""
   applicationSet:
     resources:
       limits:
-        cpu: '2'
+        cpu: "2"
         memory: 1Gi
       requests:
         cpu: 250m
         memory: 512Mi
-  rbac: {}
-  # rbac:
-  #   defaultPolicy: 'role:readonly'
-  #   policy: |
-  #      g, system:cluster-admins, role:admin
-  #   scopes: '[groups]'
+  rbac:
+    defaultPolicy: "role:admin"
+    policy: |
+      g, system:cluster-admins, role:admin
+    scopes: "[groups]"
   repo:
     image: quay.io/benswinneyau/openshift-gitops-repo-server
-    version: v1.4.5
+    version: v1.5.3
     resources:
       limits:
-        cpu: '1'
+        cpu: "1"
         memory: 512Mi
       requests:
         cpu: 250m
@@ -84,7 +83,7 @@ spec:
       requests:
         cpu: 250m
         memory: 128Mi
-    # openShiftOAuth: true
+    openShiftOAuth: true
   ha:
     enabled: false
     resources:
@@ -94,7 +93,7 @@ spec:
       requests:
         cpu: 250m
         memory: 128Mi
-  kustomizeBuildOptions: '--enable-alpha-plugins'
+  kustomizeBuildOptions: "--enable-alpha-plugins"
   tls:
     ca: {}
   redis:
@@ -109,7 +108,7 @@ spec:
     processors: {}
     resources:
       limits:
-        cpu: '2'
+        cpu: "2"
         memory: 4Gi
       requests:
         cpu: 250m

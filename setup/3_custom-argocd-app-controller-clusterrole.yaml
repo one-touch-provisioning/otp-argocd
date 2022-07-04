@@ -4,16 +4,22 @@ metadata:
   name: custom-argocd-cluster-argocd-application-controller
 rules:
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'clusterview.open-cluster-management.io'
-    resources: 
+      - odf.openshift.io
+    resources:
+      - storagesystems
+  - verbs:
+      - "*"
+    apiGroups:
+      - "clusterview.open-cluster-management.io"
+    resources:
       - managedclusters
       - managedclustersets
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - ''
+      - ""
     resources:
       - pods
       - services
@@ -24,15 +30,15 @@ rules:
       - secrets
       - serviceaccounts
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'triggers.tekton.dev'
+      - "triggers.tekton.dev"
     resources:
       - eventlisteners
       - triggerbindings
       - triggertemplates
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - apps
     resources:
@@ -41,81 +47,81 @@ rules:
       - replicasets
       - statefulsets
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'route.openshift.io'
+      - "route.openshift.io"
     resources:
       - routes
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'security.openshift.io'
+      - "security.openshift.io"
     resources:
       - securitycontextconstraints
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'operator.cert-manager.io'
+      - "operator.cert-manager.io"
     resources:
       - certmanagers
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'cert-manager.io'
+      - "cert-manager.io"
     resources:
       - clusterissuers
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'bitnami.com'
+      - "bitnami.com"
     resources:
       - sealedsecretcontrollers
       - sealedsecrets
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'integreatly.org'
+      - "integreatly.org"
     resources:
       - grafanas
       - grafanadatasources
       - grafanadashboards
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'networking.k8s.io'
+      - "networking.k8s.io"
     resources:
       - networkpolicies
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'integration.ibm.com'
+      - "integration.ibm.com"
     resources:
       - platformnavigators
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'operators.coreos.com'
+      - "operators.coreos.com"
     resources:
       - subscriptions
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'tekton.dev'
+      - "tekton.dev"
     resources:
       - pipelines
       - tasks
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'maistra.io'
+      - "maistra.io"
     resources:
       - servicemeshcontrolplanes
       - servicemeshmembers
       - servicemeshmemberrolls
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - 'networking.istio.io'
+      - "networking.istio.io"
     resources:
       - virtualservices
       - gateways
@@ -124,18 +130,18 @@ rules:
       - create
       - list
     apiGroups:
-      - ''
+      - ""
     resources:
       - events
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - batch
     resources:
       - cronjobs
       - jobs
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - argoproj.io
     resources:
@@ -146,67 +152,67 @@ rules:
       - list
       - watch
     apiGroups:
-      - '*'
+      - "*"
     resources:
-      - '*'
+      - "*"
   - verbs:
       - get
       - list
     nonResourceURLs:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - operators.coreos.com
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - operator.openshift.io
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - user.openshift.io
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - config.openshift.io
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - console.openshift.io
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
-      - ''
+      - ""
     resources:
       - namespaces
       - persistentvolumeclaims
       - persistentvolumes
       - configmaps
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - rbac.authorization.k8s.io
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - storage.k8s.io
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - appconnect.ibm.com
     resources:
@@ -214,127 +220,127 @@ rules:
       - dashboards
       - configurations
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - machineconfiguration.openshift.io
     resources:
       - machineconfigpools
       - containerruntimeconfigs
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - tuned.openshift.io
     resources:
       - tuneds
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - apiextensions.k8s.io
     resources:
       - customresourcedefinitions
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - processmining.ibm.com
     resources:
       - processminings
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - ocs.openshift.io
     resources:
       - storageclusters
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - imageregistry.operator.openshift.io
     resources:
       - configs
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - operator.ibm.com
     resources:
       - commonservices
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - mq.ibm.com
     resources:
       - queuemanagers
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - icp4a.ibm.com
     resources:
       - icp4aclusters
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - orchestrator.management.ibm.com
     resources:
       - installations
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - operator.open-cluster-management.io
     resources:
       - multiclusterhubs
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - internal.open-cluster-management.io
     resources:
       - managedclusterinfos
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - cluster.open-cluster-management.io
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - project.openshift.io
     resources:
       - projects
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - agent.open-cluster-management.io
     resources:
       - klusterletaddonconfigs
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - admissionregistration.k8s.io
     resources:
       - validatingwebhookconfigurations
       - mutatingwebhookconfigurations
   - verbs:
-      - '*' 
+      - "*"
     apiGroups:
       - cluster.open-cluster-management.io
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - clusterview.open-cluster-management.io
     resources:
-      - '*'
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - charts.helm.k8s.io
     resources:
       - xls
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - objectbucket.io
     resources:
-      - '*'  
+      - "*"
   - verbs:
       - get
       - list
@@ -349,7 +355,7 @@ rules:
       - policies
       - placementbindings
   - verbs:
-      - get 
+      - get
       - list
       - watch
       - create
@@ -361,11 +367,11 @@ rules:
     resources:
       - placementrules
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - automationcontroller.ansible.com
-    resources: 
-      - '*'
+    resources:
+      - "*"
   - verbs:
       - create
       - update
@@ -373,7 +379,7 @@ rules:
       - delete
     apiGroups:
       - hco.kubevirt.io
-    resources: 
+    resources:
       - hyperconvergeds
   - verbs:
       - create
@@ -382,7 +388,7 @@ rules:
       - delete
     apiGroups:
       - cdi.kubevirt.io
-    resources: 
+    resources:
       - datavolumes
   - verbs:
       - create
@@ -391,44 +397,44 @@ rules:
       - delete
     apiGroups:
       - kubevirt.io
-    resources: 
+    resources:
       - virtualmachines
       - virtualmachineinstances
       - virtualmachine-validator
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - platform.stackrox.io
-    resources: 
-      - '*'
+    resources:
+      - "*"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - oauth.openshift.io
-    resources: 
-      - 'oauthclients'
+    resources:
+      - "oauthclients"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - cert-manager.io
-    resources: 
-      - 'certificates'
-      - 'issuers'
-      - 'clusterissuers'
+    resources:
+      - "certificates"
+      - "issuers"
+      - "clusterissuers"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - hive.openshift.io
-    resources: 
-      - 'selectorsyncsets'
+    resources:
+      - "selectorsyncsets"
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - quay.redhat.com
     resources:
       - quayregistries
   - verbs:
-      - '*'
+      - "*"
     apiGroups:
       - agent-install.openshift.io
     resources:
@@ -440,22 +446,22 @@ metadata:
   name: open-cluster-management:subscription-admin
 rules:
   - apiGroups:
-    - app.k8s.io
+      - app.k8s.io
     resources:
-    - applications
+      - applications
     verbs:
-    - '*'
+      - "*"
   - apiGroups:
-    - apps.open-cluster-management.io
+      - apps.open-cluster-management.io
     resources:
-    - '*'
+      - "*"
     verbs:
-    - '*'
+      - "*"
   - apiGroups:
-    - ""
+      - ""
     resources:
-    - configmaps
-    - secrets
-    - namespaces
+      - configmaps
+      - secrets
+      - namespaces
     verbs:
-    - '*'
+      - "*"
