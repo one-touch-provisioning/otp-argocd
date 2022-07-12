@@ -6,19 +6,19 @@ metadata:
 data:
   resource.customizations.health.operator.open-cluster-management.io_MultiClusterHub: |
     hs = {}
+    generation = obj.metadata.generation
     if obj.status ~= nil then
-      if obj.status.phase ~= nil then
-        hs.message = obj.status.phase
-        if obj.status.phase == "Running" then
-          hs.status = "Healthy"
-        else
-          hs.status = "Progressing"
+      if obj.status.conditions ~= nil then
+        for i, condition in ipairs(obj.status.conditions) do
+          if condition.reason == "ComponentsAvailable" and condition.type == "Complete" and condition.status == "True" then
+            hs.status = "Healthy"
+            hs.message = condition.message
+            return hs
+          end
         end
-        return hs
       end
     end
     hs.status = "Progressing"
-    hs.message = "Unknown"
     return hs
 
   resource.customizations.health.hive.openshift.io_ClusterDeployment: |
@@ -27,7 +27,12 @@ data:
     if obj.status ~= nil then
       if obj.status.conditions ~= nil then
         for i, condition in ipairs(obj.status.conditions) do
-          if condition.type == "Hibernating" and condition.status == "False" then
+          if condition.type == "Hibernating" and condition.status == "True" then
+            hs.status = "Healthy"
+            hs.message = condition.message
+            return hs
+          end
+          if condition.type == "Hibernating" and condition.status == "False" and condition.reason == "ResumingOrRunning" then
             hs.status = "Healthy"
             hs.message = condition.message
             return hs
@@ -56,9 +61,9 @@ data:
     end
     hs.status = "Progressing"
     hs.message = "Waiting for managed cluster to be deploy."
-    return hs
+    return hs 
 
-  resource.customizations.health.internal.observability.open-cluster-management.io_MultiClusterObservabilit: |
+  resource.customizations.health.internal.observability.open-cluster-management.io_MultiClusterObservability: |
     hs = {}
     if obj.status ~= nil and obj.status.conditions ~= nil then
       for i, condition in ipairs(obj.status.conditions) do  
