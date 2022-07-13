@@ -36,8 +36,8 @@
 5. Retrieve admin login details
 
    ```bash
-   echo $(oc get route -n openshift-gitops otp-gitops-server -o template --template='https://{{.spec.host}}')
+   echo $(oc get route -n openshift-gitops openshift-gitops-cntk-server -o template --template='https://{{.spec.host}}')
 
    # Passsword is not needed if Log In via OpenShift is used (default)
-   oc extract secrets/otp-gitops-cluster --keys=admin.password -n openshift-gitops --to=-
+   oc extract secrets/openshift-gitops-cntk-cluster --keys=admin.password -n openshift-gitops --to=-
    ```
