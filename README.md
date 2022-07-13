@@ -27,7 +27,7 @@
 4. Create a console link
 
    ```bash
-   export ROUTE_NAME=otp-gitops-server
+   export ROUTE_NAME=openshift-gitops-cntk-server
    export ROUTE_NAMESPACE=openshift-gitops
    export CONSOLE_LINK_URL="https://$(oc get route $ROUTE_NAME -o=jsonpath='{.spec.host}' -n $ROUTE_NAMESPACE)"
    envsubst < <(cat setup/4_consolelink.yaml.envsubst) | oc apply -f -
