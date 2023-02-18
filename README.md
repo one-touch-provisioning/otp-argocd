@@ -1,3 +1,7 @@
+# Archived!
+
+The content of this repository is now in [one-touch-provisioning/otp-gitops](https://github.com/one-touch-provisioning/otp-gitops/tree/master/setup) repository.
+
 # Install and configure OpenShift GitOps
 
 - [Red Hat OpenShift GitOps](https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html) uses [Argo CD](https://argoproj.github.io/argo-cd/), an open-source declarative tool, to maintain and reconcile cluster resources.
